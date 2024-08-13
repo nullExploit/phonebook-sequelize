@@ -87,10 +87,19 @@ router.delete("/api/phonebooks/:id", async (req, res) => {
     });
 
     for (let file of readdirSync(
-      path.join(__dirname, "..", "..", "phonebook-uploads")
+      path.join(__dirname, "..", "..", "phonebook-uploads", "sequelize")
     )) {
       if (file.split("-")[1] == id) {
-        unlinkSync(path.join(__dirname, "..", "..", "phonebook-uploads", file));
+        unlinkSync(
+          path.join(
+            __dirname,
+            "..",
+            "..",
+            "phonebook-uploads",
+            "sequelize",
+            file
+          )
+        );
       }
     }
 
@@ -111,14 +120,24 @@ router.put("/api/phonebooks/:id/avatar", async (req, res) => {
       "..",
       "..",
       "phonebook-uploads",
+      "sequelize",
       fileName
     );
 
     for (let file of readdirSync(
-      path.join(__dirname, "..", "..", "phonebook-uploads")
+      path.join(__dirname, "..", "..", "phonebook-uploads", "sequelize")
     )) {
       if (file.split("-")[1] == id) {
-        unlinkSync(path.join(__dirname, "..", "..", "phonebook-uploads", file));
+        unlinkSync(
+          path.join(
+            __dirname,
+            "..",
+            "..",
+            "phonebook-uploads",
+            "sequelize",
+            file
+          )
+        );
       }
     }
 
