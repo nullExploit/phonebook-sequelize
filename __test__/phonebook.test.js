@@ -69,6 +69,115 @@ describe("phonebooks", () => {
       });
   });
 
+  it("Should limit and paginate phonebook with 'GET' method", (done) => {
+    chai
+      .request(app)
+      .get("/api/phonebooks?limit=2&page=5")
+      .end((err, res) => {
+        if (err) throw new Error("Failed while testing phonebooks");
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a("object");
+        res.body.phonebooks.should.be.a("array");
+        res.body.phonebooks[res.body.phonebooks.length - 1].should.be.a(
+          "object"
+        );
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("id");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("name");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("phone");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("avatar");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("createdAt");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("updatedAt");
+        res.body.phonebooks[res.body.phonebooks.length - 1].id.should.be.a(
+          "number"
+        );
+        res.body.phonebooks[res.body.phonebooks.length - 1].name.should.be.a(
+          "string"
+        );
+        res.body.phonebooks[res.body.phonebooks.length - 1].phone.should.be.a(
+          "string"
+        );
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].createdAt.should.be.a("string");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].updatedAt.should.be.a("string");
+        res.body.limit.should.equal(2);
+        res.body.page.should.equal(5);
+        res.body.limit.should.be.a("number");
+        res.body.page.should.be.a("number");
+        res.body.phonebooks.length.should.equal(2);
+      });
+    done();
+  });
+
+  it("Should sort phonebook with 'GET' method", (done) => {
+    chai
+      .request(app)
+      .get("/api/phonebooks?sort=desc")
+      .end((err, res) => {
+        if (err) throw new Error("Failed while testing phonebooks");
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a("object");
+        res.body.phonebooks.should.be.a("array");
+        res.body.phonebooks[res.body.phonebooks.length - 1].should.be.a(
+          "object"
+        );
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("id");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("name");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("phone");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("avatar");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("createdAt");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].should.have.property("updatedAt");
+        res.body.phonebooks[res.body.phonebooks.length - 1].id.should.be.a(
+          "number"
+        );
+        res.body.phonebooks[res.body.phonebooks.length - 1].name.should.be.a(
+          "string"
+        );
+        res.body.phonebooks[res.body.phonebooks.length - 1].phone.should.be.a(
+          "string"
+        );
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].createdAt.should.be.a("string");
+        res.body.phonebooks[
+          res.body.phonebooks.length - 1
+        ].updatedAt.should.be.a("string");
+        res.body.phonebooks[0].name.should.match(/[z]/gi);
+        res.body.phonebooks[res.body.phonebooks.length - 1].name.should.match(
+          /[a]/gi
+        );
+      });
+    done();
+  });
+
   it("Should create phonebooks with 'POST' method", (done) => {
     chai
       .request(app)
