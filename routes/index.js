@@ -20,8 +20,8 @@ router.get("/api/phonebooks", async (req, res) => {
     if (keyword) {
       params.where = {
         [Op.or]: [
-          { name: { [Op.substring]: keyword } },
-          { phone: { [Op.substring]: keyword } },
+          { name: { [Op.iLike]: `%${keyword}%` } },
+          { phone: { [Op.iLike]: `%${keyword}%` } },
         ],
       };
     }

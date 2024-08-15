@@ -12,25 +12,22 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}?sort=asc",
+					"raw": "{{url}}?keyword=&limit=&page=&sort=asc",
 					"host": [
 						"{{url}}"
 					],
 					"query": [
 						{
 							"key": "keyword",
-							"value": "",
-							"disabled": true
+							"value": ""
 						},
 						{
 							"key": "limit",
-							"value": "",
-							"disabled": true
+							"value": ""
 						},
 						{
 							"key": "page",
-							"value": "",
-							"disabled": true
+							"value": ""
 						},
 						{
 							"key": "sort",
@@ -51,12 +48,12 @@
 					"urlencoded": [
 						{
 							"key": "name",
-							"value": "Derik",
+							"value": "",
 							"type": "text"
 						},
 						{
 							"key": "phone",
-							"value": "0812445212231",
+							"value": "",
 							"type": "text"
 						}
 					]
@@ -80,7 +77,12 @@
 					"urlencoded": [
 						{
 							"key": "name",
-							"value": "Yanto",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "",
 							"type": "text"
 						}
 					]
@@ -108,6 +110,10 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
 				"url": {
 					"raw": "{{url}}/:id",
 					"host": [
