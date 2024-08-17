@@ -13,7 +13,7 @@ router.get("/api/phonebooks", async (req, res) => {
     const params = {};
 
     if (limit) {
-      params.limit = limit;
+      params.limit = Number(limit);
       params.offset = (page - 1) * limit;
     }
 
@@ -29,16 +29,17 @@ router.get("/api/phonebooks", async (req, res) => {
     if (sort) {
       params.order = [["name", sort]];
     }
-    const { count, rows } = await PhoneBook.findAndCountAll(params);
+    const data = await PhoneBook.findAndCountAll(params);
 
     res.json({
-      phonebooks: rows,
+      phonebooks: data.rows,
       page: Number(page),
       limit: Number(limit),
-      pages: limit ? Math.ceil(count / limit) : 1,
-      total: count,
+      pages: limit ? Math.ceil(data.count / Number(limit)) : 1,
+      total: data.count,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 });
